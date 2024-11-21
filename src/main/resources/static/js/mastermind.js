@@ -3,7 +3,7 @@ let selectedColors = [];
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".color-button").forEach(button => {
         button.addEventListener("click", () => {
-            const color = button.classList[1]; // Get color from the second class
+            const color = button.classList[1];
             selectColor(color, button);
         });
     });
