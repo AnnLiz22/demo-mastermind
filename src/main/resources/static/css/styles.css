@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 20px;
+}
+
+form {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px rgba(0, 123, 255, 0.5);
+}
+
+.color-picker {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.color-button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.color-button:hover {
+    transform: scale(1.1);
+}
+
+.color-button:focus {
+    border: 2px solid black;
+}
+
+.color-button.red {
+    background-color: red;
+}
+
+.color-button.blue {
+    background-color: blue;
+}
+
+.color-button.green {
+    background-color: green;
+}
+
+.color-button.yellow {
+    background-color: yellow;
+}
+
+.color-button.purple {
+    background-color: purple;
+}
+
+.color-button.orange {
+    background-color: orange;
+}
+
+.feedback {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.guess-history {
+    margin-top: 30px;
+}
+
+.guess-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.guess-history li {
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+form[style] {
+    text-align: center;
+}
+
+.color-button.selected {
+  border: 3px solid black;
+  opacity: 0.8;
+}
+
+
+
+

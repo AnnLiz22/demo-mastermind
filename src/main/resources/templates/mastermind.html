@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mastermind Game</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/mastermind.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Mastermind Game</h1>
+
+    <div th:if="${game.gameOver}">
+        <h2> <p th:text="${feedback}"></p></h2>
+        <form th:action="@{/reset}" method="post">
+            <button type="submit">Start a New Game</button>
+        </form>
+    </div>
+
+    <div th:if="${!game.gameOver}">
+        <h2>Make Your Guess! </h2>
+        <form th:action="@{/guess}" method="post">
+            <label for="guessInput">Select <b> four </b> colors :</label>
+
+            <div class="color-picker">
+
+                <button type="button" class="color-button red" ></button>
+                <button type="button" class="color-button blue" ></button>
+                <button type="button" class="color-button green" ></button>
+                <button type="button" class="color-button yellow" ></button>
+                <button type="button" class="color-button purple" ></button>
+                <button type="button" class="color-button orange" ></button>
+            </div>
+
+            <input type="hidden" name="guess" id="guessInput" >
+            <button type="submit">Submit Guess</button>
+        </form>
+        <p class="feedback" th:text="${feedback}"></p>
+    </div>
+
+    <div class="guess-history">
+        <h3>Your Guess History: </h3>
+        <ul>
+            <li th:each="guess : ${game.guesses}" th:text="${guess}"></li>
+
+        </ul>
+    </div>
+
+    <form th:action="@{/reset}" method="post" >
+        <button type="submit">Reset Game</button>
+    </form>
+</div>
+
+</body>
+</html>
