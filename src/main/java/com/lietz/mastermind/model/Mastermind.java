@@ -39,7 +39,7 @@ public class Mastermind {
         tempSecretCode.add(color);
     }}
     secretCode = new ArrayList<>(tempSecretCode);
-    logger.info("secret code generated: " + secretCode);
+    logger.info("Secret code generated: " + secretCode);
     return secretCode ;
   }
 }

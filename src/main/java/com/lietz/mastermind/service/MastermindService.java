@@ -26,17 +26,17 @@ public class MastermindService {
 
   public String makeAGuess(String guess) {
     List<String> parsedGuess = Arrays.asList(guess.split(","));
-    logger.info("getting parsed guess: " + parsedGuess);
+    logger.info("Getting parsed guess: " + parsedGuess);
 
     if (mastermind.isGameOver()) {
       return "Game is already over!";
     }
     if (parsedGuess.size() != mastermind.getSecretCode().size()) {
-      return "Invalid guess! Please choose 4 colours.";
+      return "Invalid guess! Please choose four colours.";
     }
 
     String feedback = generateFeedback(mastermind.getSecretCode(), parsedGuess);
-    logger.info("feedback generated: " + feedback);
+    logger.info("Feedback generated: " + feedback);
 
     mastermind.getGuesses().add(String.join(", ", parsedGuess) + " - " + feedback);
     logger.info("Showing guess: " + parsedGuess);
@@ -47,11 +47,12 @@ public class MastermindService {
     if (parsedGuess.equals(mastermind.getSecretCode())) {
       mastermind.setGameOver(true);
 
-      logger.info("setting game over when win");
+      logger.info("Setting game over when win");
       return "Correct! You win!";
+
     } else if (mastermind.getUsedAttempts() >= mastermind.getMaxAttempts()) {
       mastermind.setGameOver(true);
-      logger.info("setting game over when out of attempts");
+      logger.info("Setting game over when out of attempts");
       return "Out of attempts! The code was: " + mastermind.getSecretCode();
     }
     return feedback;
@@ -72,12 +73,12 @@ public class MastermindService {
         correctColors++;
       }
     }
-    return "Colors on the correct position: " + correctPositions + " Correct colors : " + correctColors;
+    return "Colors on the correct position : " + correctPositions + ". Correct colors : " + correctColors;
   }
 
   public void resetGame() {
 
     this.mastermind = new Mastermind();
-    logger.info("resetting game");
+    logger.info("Resetting game");
   }
 }
