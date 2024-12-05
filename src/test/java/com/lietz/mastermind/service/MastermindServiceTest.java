@@ -57,6 +57,17 @@ class MastermindServiceTest {
   }
 
   @Test
+  void shouldReturnCorrectMessageWhenUserChoosesOnlyTwoColours() {
+    List<String> secretCode = List.of("red", "green", "yellow", "orange");
+    String guess = "red,green";
+    when(mastermind.getSecretCode()).thenReturn(secretCode);
+    when(mastermind.getMaxAttempts()).thenReturn(8);
+
+    String result = mastermindService.makeAGuess(guess);
+    Assertions.assertEquals("Invalid guess! Please choose four colours.", result);
+
+  }
+  @Test
   void shouldReturnCorrectMessageWhenGuessFails() {
     List<String> secretCode = List.of("red", "green", "yellow", "orange");
     String guess = "red,blue,purple,green";
