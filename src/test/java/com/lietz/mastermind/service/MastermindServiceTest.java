@@ -30,7 +30,7 @@ class MastermindServiceTest {
   }
 
   @Test
-  void shouldReturnCorrectMessageWhenMakeAGuess() {
+  void shouldReturnCorrectMessageWhenGuessIsCorrect() {
 
     List<String> secretCode = List.of("red", "green", "yellow", "orange");
     String guess = "red,green,yellow,orange";
@@ -40,6 +40,45 @@ class MastermindServiceTest {
     String result = mastermindService.makeAGuess(guess);
 
     Assertions.assertEquals("Correct! You win!", result);
+
+    verify(mastermind).setGameOver(true);
+  }
+
+  @Test
+  void shouldReturnCorrectMessageWhenUserChoosesToManyColours() {
+    List<String> secretCode = List.of("red", "green", "yellow", "orange");
+    String guess = "red,green,yellow,purple,blue";
+    when(mastermind.getSecretCode()).thenReturn(secretCode);
+    when(mastermind.getMaxAttempts()).thenReturn(8);
+
+    String result = mastermindService.makeAGuess(guess);
+    Assertions.assertEquals("Invalid guess! Please choose four colours.", result);
+
+  }
+
+  @Test
+  void shouldReturnCorrectMessageWhenGuessFails() {
+    List<String> secretCode = List.of("red", "green", "yellow", "orange");
+    String guess = "red,blue,purple,green";
+    when(mastermind.getSecretCode()).thenReturn(secretCode);
+    when(mastermind.getMaxAttempts()).thenReturn(8);
+
+    String result = mastermindService.makeAGuess(guess);
+    Assertions.assertEquals("Colors on the correct position : 1. Correct colors : 2", result);
+    Assertions.assertFalse(mastermind.isGameOver());
+  }
+
+  @Test
+  void shouldReturnCorrectMessageWhenUsedAllAttempts() {
+    List<String> secretCode = List.of("red", "green", "yellow", "orange");
+    String guess = "red,blue,purple,green";
+    when(mastermind.getSecretCode()).thenReturn(secretCode);
+    when(mastermind.getMaxAttempts()).thenReturn(8);
+    when(mastermind.getUsedAttempts()).thenReturn(8);
+
+    String result = mastermindService.makeAGuess(guess);
+    String expected = "Out of attempts! The code was: " + secretCode;
+    Assertions.assertEquals(expected, result);
 
     verify(mastermind).setGameOver(true);
   }
