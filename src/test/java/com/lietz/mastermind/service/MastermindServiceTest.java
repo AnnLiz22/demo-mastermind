@@ -67,6 +67,7 @@ class MastermindServiceTest {
     Assertions.assertEquals("Invalid guess! Please choose four colours.", result);
 
   }
+
   @Test
   void shouldReturnCorrectMessageWhenGuessFails() {
     List<String> secretCode = List.of("red", "green", "yellow", "orange");
@@ -96,5 +97,9 @@ class MastermindServiceTest {
 
   @Test
   void resetGame() {
+
+    mastermindService = mock(MastermindService.class);
+    mastermindService.resetGame();
+    verify(mastermindService, times(1)).resetGame();
   }
 }
