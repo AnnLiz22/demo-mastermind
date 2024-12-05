@@ -1,6 +1,5 @@
 package com.lietz.mastermind.service;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -8,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import com.lietz.mastermind.model.Mastermind;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +22,9 @@ class MastermindServiceTest {
   @InjectMocks
   private MastermindService mastermindService;
 
+  List<String> secretCode = List.of("red", "green", "yellow", "orange");
+  String guess;
+
   @BeforeEach
   void setUp() {
     MockitoAnnotations.openMocks(this);
@@ -32,8 +33,7 @@ class MastermindServiceTest {
   @Test
   void shouldReturnCorrectMessageWhenGuessIsCorrect() {
 
-    List<String> secretCode = List.of("red", "green", "yellow", "orange");
-    String guess = "red,green,yellow,orange";
+    guess = "red,green,yellow,orange";
     when(mastermind.getSecretCode()).thenReturn(secretCode);
     when(mastermind.getMaxAttempts()).thenReturn(8);
 
@@ -45,9 +45,8 @@ class MastermindServiceTest {
   }
 
   @Test
-  void shouldReturnCorrectMessageWhenUserChoosesToManyColours() {
-    List<String> secretCode = List.of("red", "green", "yellow", "orange");
-    String guess = "red,green,yellow,purple,blue";
+  void shouldReturnCorrectFeedbackWhenUserChoosesMoreThanFourColours() {
+    guess = "red,green,yellow,purple,blue";
     when(mastermind.getSecretCode()).thenReturn(secretCode);
     when(mastermind.getMaxAttempts()).thenReturn(8);
 
@@ -57,9 +56,8 @@ class MastermindServiceTest {
   }
 
   @Test
-  void shouldReturnCorrectMessageWhenUserChoosesOnlyTwoColours() {
-    List<String> secretCode = List.of("red", "green", "yellow", "orange");
-    String guess = "red,green";
+  void shouldReturnCorrectFeedbackWhenUserChoosesOnlyTwoColours() {
+    guess = "red,green";
     when(mastermind.getSecretCode()).thenReturn(secretCode);
     when(mastermind.getMaxAttempts()).thenReturn(8);
 
@@ -69,9 +67,8 @@ class MastermindServiceTest {
   }
 
   @Test
-  void shouldReturnCorrectMessageWhenGuessFails() {
-    List<String> secretCode = List.of("red", "green", "yellow", "orange");
-    String guess = "red,blue,purple,green";
+  void shouldReturnCorrectFeedbackWhenGuessFails() {
+    guess = "red,blue,purple,green";
     when(mastermind.getSecretCode()).thenReturn(secretCode);
     when(mastermind.getMaxAttempts()).thenReturn(8);
 
@@ -81,9 +78,8 @@ class MastermindServiceTest {
   }
 
   @Test
-  void shouldReturnCorrectMessageWhenUsedAllAttempts() {
-    List<String> secretCode = List.of("red", "green", "yellow", "orange");
-    String guess = "red,blue,purple,green";
+  void shouldReturnCorrectFeedbackWhenUsedAllAttempts() {
+    guess = "red,blue,purple,green";
     when(mastermind.getSecretCode()).thenReturn(secretCode);
     when(mastermind.getMaxAttempts()).thenReturn(8);
     when(mastermind.getUsedAttempts()).thenReturn(8);
@@ -96,7 +92,7 @@ class MastermindServiceTest {
   }
 
   @Test
-  void resetGame() {
+  void shouldResetGame() {
 
     mastermindService = mock(MastermindService.class);
     mastermindService.resetGame();
